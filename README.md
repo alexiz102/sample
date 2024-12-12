@@ -1,5 +1,5 @@
 run in terminal
 
-virtualenv venv
-venv/Scripts/activate
+virtualenv venv\n
+venv/Scripts/activate\n
 pip install -r requirements.txt
