@@ -21,11 +21,11 @@ def generate_frames():
         
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html') # Render main html page
 
 @app.route("/video_feed")
 def video_feed():
-    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame') # Making rendering video feed
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8080)
+    app.run(debug=True, host="0.0.0.0", port=8080) # Start webserver at http://127.0.0.1:8080
