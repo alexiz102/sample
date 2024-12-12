@@ -2,21 +2,22 @@ from flask import Flask, render_template, request, Response
 from ultralytics import YOLO
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0) # Initialize webcam
 
-model = YOLO("yolov8n.pt")
+model = YOLO("yolov8n.pt") # Initialize model
 
-app = Flask(__name__)
+app = Flask(__name__) # Initialize webserver
 
-def generate_frames():
+#function for retrieveing frames and detection
+def generate_frames(): 
     while True:
-        ret, frame = cap.read()
+        ret, frame = cap.read() # Get Frames
         if not ret:
             break
-        results = model.predict(frame)
-        frame = results[0].plot()
+        results = model.predict(frame) # Make prediction
+        frame = results[0].plot() # Plot predictions
         yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + cv2.imencode('.jpg', frame)[1].tobytes() + b'\r\n')
+                b'Content-Type: image/jpeg\r\n\r\n' + cv2.imencode('.jpg', frame)[1].tobytes() + b'\r\n') # Send Frames
         
 @app.route('/')
 def index():
